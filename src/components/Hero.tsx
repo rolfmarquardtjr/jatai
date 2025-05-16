@@ -2,9 +2,11 @@ import { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import BeeParticles from "./BeeParticles";
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const Hero = () => {
   const elementsRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -58,17 +60,19 @@ const Hero = () => {
             <div className="relative w-full max-w-md">
               <div className="absolute -top-12 -left-12 w-36 h-36 bg-jatai-yellow/20 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-12 -right-12 w-36 h-36 bg-jatai-yellow/20 rounded-full blur-3xl"></div>
-              <div className="relative z-10 reveal">
-                <div className="animate-float">
-                  <div className="bg-gradient-to-br from-jatai-gray/40 to-jatai-dark-gray/60 rounded-full p-8 backdrop-blur-sm">
-                    <img
-                      src="/lovable-uploads/e5ba509f-7c5d-4c80-89b0-6fa4c9ef7572.png"
-                      alt="Logo Jatai.AI"
-                      className="w-full h-auto max-w-[360px] mx-auto"
-                    />
+              {!isMobile && (
+                <div className="relative z-10 reveal">
+                  <div className="animate-float">
+                    <div className="bg-gradient-to-br from-jatai-gray/40 to-jatai-dark-gray/60 rounded-full p-8 backdrop-blur-sm">
+                      <img
+                        src="/lovable-uploads/e5ba509f-7c5d-4c80-89b0-6fa4c9ef7572.png"
+                        alt="Logo Jatai.AI"
+                        className="w-full h-auto max-w-[360px] mx-auto"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

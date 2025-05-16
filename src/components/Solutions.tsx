@@ -3,8 +3,13 @@ import {
   Cpu, 
   LineChart, 
   Network, 
-  Bot
+  Bot,
+  BrainCircuit,
+  BarChart3,
+  Lightbulb,
+  Zap
 } from "lucide-react";
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const solutionItems = [
   {
@@ -31,6 +36,7 @@ const solutionItems = [
 
 const Solutions = () => {
   const elementsRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -82,16 +88,18 @@ const Solutions = () => {
         </div>
         
         <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal">
-          <div className="relative">
-            <div className="absolute -top-8 -left-8 w-48 h-48 bg-jatai-yellow/10 rounded-full blur-3xl"></div>
-            <div className="relative z-10 w-full h-[400px] flex items-center justify-center">
-              <img 
-                src="/lovable-uploads/e5ba509f-7c5d-4c80-89b0-6fa4c9ef7572.png" 
-                alt="Logo Jatai.AI" 
-                className="max-h-full max-w-full object-contain"
-              />
+          {!isMobile && (
+            <div className="relative">
+              <div className="absolute -top-8 -left-8 w-48 h-48 bg-jatai-yellow/10 rounded-full blur-3xl"></div>
+              <div className="relative z-10 w-full h-[400px] flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/e5ba509f-7c5d-4c80-89b0-6fa4c9ef7572.png" 
+                  alt="Logo Jatai.AI" 
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
             </div>
-          </div>
+          )}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6" id="o-que-fazemos">O que fazemos</h2>
             <p className="text-lg text-jatai-light-gray mb-6">

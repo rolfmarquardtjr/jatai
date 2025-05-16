@@ -1,6 +1,8 @@
 import { useRef, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
-const BEE_COUNT = 32;
+const DESKTOP_BEE_COUNT = 32;
+const MOBILE_BEE_COUNT = 15;
 const COLORS = [
   'rgba(255, 221, 51, 0.95)', // amarelo principal
   'rgba(255, 255, 180, 0.7)', // brilho
@@ -20,6 +22,7 @@ const BeeParticles = () => {
   const animationRef = useRef<number>();
   const bees = useRef<any[]>([]);
   const mouse = useRef({ x: 0, y: 0, over: false });
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -56,15 +59,18 @@ const BeeParticles = () => {
     canvas.addEventListener('mouseenter', handleMouseEnter);
     canvas.addEventListener('mouseleave', handleMouseLeave);
 
+    const BEE_COUNT_TO_USE = isMobile ? MOBILE_BEE_COUNT : DESKTOP_BEE_COUNT;
+
     // Inicializa as "abelhas"
-    bees.current = Array.from({ length: BEE_COUNT }).map(() => {
+    bees.current = Array.from({ length: BEE_COUNT_TO_USE }).map(() => {
       const angle = random(0, Math.PI * 2);
+      const baseSize = isMobile ? random(1.5, 3.5) : random(2.5, 5.5);
       return {
         x: random(0, width),
         y: random(0, height),
         vx: Math.cos(angle) * random(0.4, 1.2),
         vy: Math.sin(angle) * random(0.4, 1.2),
-        size: random(2.5, 5.5),
+        size: baseSize,
         color: COLORS[Math.floor(random(0, COLORS.length))],
         t: random(0, 1000),
         speed: random(0.7, 1.7),
@@ -100,13 +106,15 @@ const BeeParticles = () => {
         if (bee.x < 0 || bee.x > width) bee.vx *= -1;
         if (bee.y < 0 || bee.y > height) bee.vy *= -1;
 
+        const shadowBlurAmount = isMobile ? 10 + bee.size * 1.5 : 18 + bee.size * 2;
+
         // Desenha "abelha" (ponto brilhante)
         ctx.save();
         ctx.beginPath();
         ctx.arc(bee.x, bee.y, bee.size, 0, Math.PI * 2);
         ctx.fillStyle = bee.color;
         ctx.shadowColor = '#fffbe6';
-        ctx.shadowBlur = 18 + bee.size * 2;
+        ctx.shadowBlur = shadowBlurAmount;
         ctx.globalAlpha = 0.85;
         ctx.fill();
         ctx.restore();
@@ -134,7 +142,7 @@ const BeeParticles = () => {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'auto',
-        opacity: 0.85,
+        opacity: isMobile ? 0.7 : 0.85,
       }}
       aria-hidden="true"
     />
