@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { 
   Cpu, 
   LineChart, 
-  Connection, 
+  Network, 
   Bot
 } from "lucide-react";
 
@@ -19,7 +19,7 @@ const solutionItems = [
     description: "Implementação de sistemas que identificam padrões e antecipam problemas, garantindo manutenção proativa e continuidade operacional.",
   },
   {
-    icon: Connection,
+    icon: Network,
     title: "Integração com Sistemas",
     description: "Nossas soluções se conectam diretamente com ERPs, CRMs e bancos de dados, mantendo a fluidez dos processos internos.",
   },
