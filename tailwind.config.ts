@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config = {
 	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{ts,tsx}",
@@ -52,21 +52,21 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				brand: {
+					yellow: '#FFD700',
 				},
-				jatai: {
-					yellow: '#F5B942',
-					gray: '#3A4045',
-					'light-gray': '#8E9196',
-					'dark-gray': '#1A1F2C',
+				gray: {
+					50: '#FAFAFA',
+					100: '#F5F5F5',
+					200: '#EEEEEE',
+					300: '#E0E0E0',
+					400: '#BDBDBD',
+					500: '#9E9E9E',
+					600: '#757575',
+					700: '#616161',
+					800: '#424242',
+					900: '#212121',
+					950: '#121212',
 				},
 			},
 			borderRadius: {
@@ -128,3 +128,5 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+export default config;
